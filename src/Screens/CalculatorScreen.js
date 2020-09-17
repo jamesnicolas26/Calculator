@@ -10,27 +10,25 @@ const CalculatorScreen = () => {
     const [firstint, first] = useState('');
     const [secondint, second] = useState('');
     const [operator, setOperator] = useState('');
-
+    const [result, setResult] = useState('');
 
     validate = (firstint, secondint, operator) => {
-      
-        let value
         let regex = /^([+-]?[1-9]\d*\.?\d*|0)$/
         console.log(firstint);
         if (regex.test(firstint) === true ) {
             if(regex.test(secondint) === true ){
                 if(operator === "+"){
-					value=(parseFloat(firstint) + parseFloat(secondint)).toString();
-					Alert.alert(value);
+					setResult((parseFloat(firstint) + parseFloat(secondint)).toString());
+					
 				}else if(operator === "-"){
-					value=(parseFloat(firstint) - parseFloat(secondint)).toString();
-					Alert.alert(value);
+					setResult((parseFloat(firstint) - parseFloat(secondint)).toString());
+					
 				}else if(operator === "*"){
-					value=(parseFloat(firstint) * parseFloat(secondint)).toString();
-					Alert.alert(value);
+					setResult((parseFloat(firstint) * parseFloat(secondint)).toString());
+					
 				}else if(operator ==="/"){
-					value=(parseFloat(firstint) / parseFloat(secondint)).toString();
-					Alert.alert(value);
+					setResult((parseFloat(firstint) / parseFloat(secondint)).toString());
+					
 				}
             }else{
                 Alert.alert("Error Input", "Please Enter a valid Integer");
@@ -45,6 +43,12 @@ const CalculatorScreen = () => {
     <View style={styles.container} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
     <ScrollView>
       <StatusBar style="auto" />
+      <TextInput 
+      value={result}
+      style={{ height: 50, width: 300, borderColor: 'white', borderWidth: 3,  color:'white', marginTop: 20 }}
+      placeholder={result}
+            textAlign={'center'}
+            editable={false} />
       <View style={styles.container3}>
         <Text style={styles.textSpace}>First Integer</Text>
           <Text>{"              "}</Text>
@@ -53,14 +57,14 @@ const CalculatorScreen = () => {
       <View style={styles.container3}>
         <TextInput
         value={firstint}
-        style={{ height: 50, width: 100, borderColor: 'white', borderWidth: 2,  color:'white', paddingLeft: 20 }} 
+        style={{ height: 30, width: 100, borderColor: 'white', borderWidth: 3,  color:'white', paddingLeft: 10 }} 
         onChangeText={value => first(value)}
         keyboardType="numeric"
         />
           <Text style={styles.textOperator}>{"    "}{operator}{"    "}</Text>
         <TextInput
          value={secondint}
-        style={{ height: 50, width: 100, borderColor: 'white', borderWidth: 2, color:'white', paddingLeft: 20 }}
+        style={{ height: 30, width: 100, borderColor: 'white', borderWidth: 3, color:'white', paddingLeft: 10 }}
         onChangeText={value => second(value)}
         keyboardType="numeric"
         />
@@ -91,6 +95,7 @@ const CalculatorScreen = () => {
               setOperator('')
               first('')
               second('')
+              setResult('')
             }}
             style={styles.buttonX}
           ><Text style={styles.textSpace2}>Clear</Text>
@@ -117,7 +122,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#696969',
-    color: 'white'
+    color: 'white',
+    marginTop: 20
   },
 
   container3:{
@@ -126,7 +132,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#696969',
-    color: 'white'
+    color: 'white',
+    marginTop:20 
   },
 
   textSpace:{
